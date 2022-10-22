@@ -1,0 +1,8 @@
+.ui-slider-list{
+    display: flex;
+    overflow: hidden;
+}
+
+.ui-slider-item{
+    cursor: grab;
+}
