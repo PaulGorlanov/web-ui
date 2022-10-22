@@ -36,6 +36,9 @@
                     <div class="ui-slider-item">
                         <img src="https://cdn.sokolov.ru/upload/main-page/slider/2720x1300/9e35f987343f051e1bc54bd5d0d07e8d.jpg" alt="">
                     </div>
+                    <div class="ui-slider-item">
+                        <img src="https://cdn.sokolov.ru/upload/main-page/slider/2720x1300/9e35f987343f051e1bc54bd5d0d07e8d.jpg" alt="">
+                    </div>
                 </div>
                 <div class="ui-slider-nav" data-ui-slider-nav>
 
@@ -47,8 +50,11 @@
             <script>
                 var elem = document.querySelector('[data-ui-slider="main-slider"]');
                 var mainSlider = new UISLider(elem, {
-                    slidesToShow: 1,
-                    slidesMargin: '20px 30px'
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    slidesMargin: '10px 10px',
+                    dots: true,
+                    arrows: true,
                 });
             </script>
 
