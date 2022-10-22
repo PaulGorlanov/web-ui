@@ -40,7 +40,7 @@ p {
     line-height: 150%;
 }
 
-main{
+.main-container{
     max-width: 900px;
     margin: 0 auto;
 }
