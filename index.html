@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main page</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/local/templates/web-ui/styles/main.css">
+    <link rel="stylesheet" href="/local/templates/web-ui/styles/ui-main.css">
+    <link rel="stylesheet" href="/local/templates/web-ui/styles/ui-inputs.css">
+</head>
+<body>
+    
+    <main>
+        <h1>Web-ui examples</h1>
+        <p>
+            Custom css/js web-ui
+        </p>
+        <h2>Text</h2>
+        <!-- INPUT TEXT -->
+        <div class="ui-input ui-input--text">
+            <div class="ui-input__wrapper">
+                <label class="ui-input__label">
+                    <input type="text" name="text" value="" placeholder="Enter text" required>
+                    <span class="ui-input__placeholder">Name</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="ui-input ui-input--text">
+            <div class="ui-input__wrapper">
+                <label class="ui-input__label">
+                    <input type="number" name="number" value="" placeholder="Enter text">
+                    <span class="ui-input__placeholder">Number</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- INPUT TEXTAREA -->
+        <div class="ui-input ui-input--text">
+            <div class="ui-input__wrapper">
+                <label class="ui-input__label">
+                    <textarea name="textarea" placeholder="Enter text"></textarea>
+                    <span class="ui-input__placeholder">Input text</span>
+                </label>
+            </div>
+        </div>
+
+        <h2>Checkboxes</h2>
+
+        <!-- INPUT checkbox -->
+        <h3>CheckBox</h3>
+        <div class="ui-input ui-input--checkbox">
+            <label class="ui-input__label">
+                <input type="checkbox" name="checkbox" required checked>
+                <div class="ui-input__placeholder">Checkbox 1</div>
+            </label>
+        </div>
+        <div class="ui-input ui-input--checkbox">
+            <label class="ui-input__label">
+                <input type="checkbox" name="checkbox" required >
+                <div class="ui-input__placeholder">Checkbox 2</div>
+            </label>
+        </div>
+
+        <!-- INPUT radio -->
+        <h3>Radio</h3>
+        <div class="ui-input ui-input--radio">
+            <label class="ui-input__label">
+                <input type="radio" name = "radio" required >
+                <div class="ui-input__placeholder">Radio 1</div>
+            </label>
+        </div>
+        <div class="ui-input ui-input--radio">
+            <label class="ui-input__label">
+                <input type="radio" name = "radio" required checked>
+                <div class="ui-input__placeholder">Radio 2</div>
+            </label>
+        </div>
+        <div class="ui-input ui-input--radio">
+            <label class="ui-input__label">
+                <input type="radio" name = "radio" required >
+                <div class="ui-input__placeholder">Radio 3</div>
+            </label>
+        </div>
+        <div class="ui-input ui-input--radio">
+            <label class="ui-input__label">
+                <input type="radio" name = "radio" required >
+                <div class="ui-input__placeholder">Radio 4</div>
+            </label>
+        </div>
+        
+    </main>
+
+</body>
+</html>
