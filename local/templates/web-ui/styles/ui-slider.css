@@ -21,7 +21,8 @@
 
 .ui-slider-item  img{
     user-select: none;
-    pointer-events: none
+    pointer-events: none;
+    width: 100%;
 }
 
 .ui-slider-nav ul {
@@ -45,17 +46,25 @@
 
 /* CSS PROFILE */
 
+.ui-slider{
+    --ui-sllider-scroll: 2;
+}
+
 .ui-slider-item {
-    --ui-slider-item-width: calc(100% / 3);
+    --ui-slider-item-width: calc(100% / 2);
     --ui-slider-item-padding: 10px;
+    
 
     flex: 0 0 var(--ui-slider-item-width);
     padding: var(--ui-slider-item-padding);
 }
 
 @media (max-width: 992px) {
+    .ui-slider{
+        --ui-sllider-scroll: 1;
+    }
     .ui-slider-item {
-        --ui-slider-item-width: calc(100% / 2);
+        --ui-slider-item-width: calc(100% / 1);
         --ui-slider-item-padding: 5px;
     }
 }

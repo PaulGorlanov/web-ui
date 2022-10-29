@@ -21,7 +21,10 @@ class UISLider {
     }
 
     __findSlides() {
-        let slides = this.domElement.querySelectorAll(':scope > [data-ui-slider-list] > div');
+
+        this.track = this.domElement.querySelector(':scope  [data-ui-slider-list]');
+
+        let slides = this.track.querySelectorAll(':scope > div');
 
         slides.forEach((slide, index) => {
             this.__addSlideId(slide, index);
@@ -30,7 +33,6 @@ class UISLider {
                 this.__setSlideWidth(slide);
                 this.__setSlidePadding(slide);
             }
-
 
             this.arSlides[index] = slide;
         });
@@ -55,19 +57,19 @@ class UISLider {
     }
 
     __initDots() {
-        let dotsContainer = this.domElement.querySelector(':scope > [data-ui-slider-nav]');
+        this.dotsContainer = this.domElement.querySelector(':scope > [data-ui-slider-nav]');
 
-        if (!dotsContainer) {
+        if (!this.dotsContainer) {
             // :TODO
             // this.domElement.createElement
         }
 
-        this.__createDotsHtml(dotsContainer);
+        this.__createDotsHtml();
         this.__addDotsEvent();
 
     }
 
-    __createDotsHtml(dotsContainer) {
+    __createDotsHtml() {
         let nav = document.createElement('nav'),
             ul = document.createElement('ul');
 
@@ -83,7 +85,7 @@ class UISLider {
             this.arDots[index] = li;
         });
 
-        dotsContainer.append(nav);
+        this.dotsContainer.append(nav);
 
     }
 
@@ -101,11 +103,9 @@ class UISLider {
 
     slideTo(index) {
 
-        let track = this.domElement.querySelector(':scope  [data-ui-slider-list]');
+        this.track.classList.remove('ui-slider-list--disableAnimation');
 
-        track.classList.remove('ui-slider-list--disableAnimation');
-
-        track.style.transform = 'translateX(-' + this.arSlides[index].offsetLeft + 'px)'
+        this.track.style.transform = 'translateX(-' + this.arSlides[index].offsetLeft + 'px)'
 
         this.__slideActive(index);
 
@@ -119,13 +119,13 @@ class UISLider {
     }
 
     resize() {
-        let track = this.domElement.querySelector(':scope  [data-ui-slider-list]');
+        if (this.params.useCssProfile) {
+            this.params.slidesToScroll = parseInt(getComputedStyle(this.domElement).getPropertyValue('--ui-sllider-scroll'));
+        }
 
-        // let transitionDuration = window.getComputedStyle(track).transitionDuration;
+        this.track.classList.add('ui-slider-list--disableAnimation')
 
-        track.classList.add('ui-slider-list--disableAnimation')
-
-        track.style.transform = 'translateX(-' + this.arSlides[this.curSlide].offsetLeft + 'px)';
+        this.track.style.transform = 'translateX(-' + this.arSlides[this.curSlide].offsetLeft + 'px)';
     }
 
     __initObserver() {
@@ -150,14 +150,14 @@ class UISLider {
         this.posThreshold = this.arSlides[0].offsetWidth * .35;
         this.trfRegExp = /[-0-9.]+(?=px)/;
 
-        
+
         this.swipeAction = this.swipeAction.bind(this);
         this.swipeEnd = this.swipeEnd.bind(this);
 
-        let track = this.domElement.querySelector(':scope  [data-ui-slider-list]');
+        console.log(this.track)
 
-        track.addEventListener('touchstart',  this.swipeStart.bind(this));
-        track.addEventListener('mousedown', this.swipeStart.bind(this));
+        this.track.addEventListener('touchstart', this.swipeStart.bind(this));
+        this.track.addEventListener('mousedown', this.swipeStart.bind(this));
     }
 
     swipeStart(event) {
@@ -165,34 +165,29 @@ class UISLider {
 
         this.posInit = this.posX1 = evt.clientX;
 
-        console.log(this.posInit)
+        this.track.classList.add('ui-slider-list--disableAnimation');
 
-        let track = this.domElement.querySelector(':scope  [data-ui-slider-list]');
-        track.classList.add('ui-slider-list--disableAnimation');
 
-        document.addEventListener('touchmove', this.swipeAction );
+        document.addEventListener('touchmove', this.swipeAction);
         document.addEventListener('touchend', this.swipeEnd);
 
         document.addEventListener('mousemove', this.swipeAction);
         document.addEventListener('mouseup', this.swipeEnd);
+
 
     }
 
     swipeAction(event) {
         let evt = this.getEvent(event);
 
-        let track = this.domElement.querySelector(':scope  [data-ui-slider-list]');
-
-        let style = track.style.transform,
+        let style = this.track.style.transform,
 
             transform = +style.match(this.trfRegExp)[0];
 
         this.posX2 = this.posX1 - evt.clientX;
         this.posX1 = evt.clientX;
 
-        console.log(this.posX2, this.posX1)
-
-        track.style.transform = `translate3d(${transform - this.posX2}px, 0px, 0px)`;
+        this.track.style.transform = `translate3d(${transform - this.posX2}px, 0px, 0px)`;
 
     }
 
@@ -207,15 +202,15 @@ class UISLider {
 
         if (Math.abs(this.posFinal) > this.posThreshold) {
             if (this.posInit < this.posX1) {
-                this.curSlide--;
+                this.curSlide -= this.params.slidesToScroll;
             } else if (this.posInit > this.posX1) {
-                this.curSlide++;
+                this.curSlide += this.params.slidesToScroll;
             }
         }
 
-        if(this.curSlide <= 0){ this.curSlide = 0} 
+        if (this.curSlide <= 0) { this.curSlide = 0 }
 
-        if(this.curSlide >= this.arSlides.length) {this.curSlide = this.arSlides.length - 1}
+        if (this.curSlide >= this.arSlides.length) { this.curSlide = this.arSlides.length - 1 }
 
         this.slideTo(this.curSlide);
     }
